@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("총원: ");
+        int amount = sc.nextInt();
+
+        System.out.print("출석자: ");
+        int attend = sc.nextInt();
+
+        System.out.print("결석자: ");
+        int abs = sc.nextInt();
+
+        if (attend > abs) {
+            System.out.println("출석자 수 가 결석자 수 보다 많습니다.");
+        } else if (attend == abs) {
+            System.out.println("출석자와 결석자 수가 같네요...");
+        } else {
+            System.out.println("다음부터 더 재밌게 운영하세요.");
+        }
+
+        sc.close();
+
+    }
+}
