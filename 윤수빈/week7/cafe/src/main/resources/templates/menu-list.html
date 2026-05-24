@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>메뉴 목록 | Cozy Bean</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', serif; background: #fdf6ec; color: #3d2b1f; }
+
+    header {
+      background: #3d2b1f;
+      color: #fdf6ec;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { font-size: 1.6rem; letter-spacing: 2px; }
+    header a { color: #f5c97a; text-decoration: none; font-size: 0.95rem; }
+
+    .page-title {
+      text-align: center;
+      padding: 3rem 2rem 1rem;
+    }
+    .page-title h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .page-title p { color: #7a5c45; font-size: 0.95rem; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 4rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(61,43,31,0.08);
+      transition: transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .menu-card:hover { transform: translateY(-4px); }
+    .menu-card-img {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .coffee-bg { background: #f5e6cc; }
+    .ade-bg { background: #d4f0e0; }
+    .tea-bg { background: #e8f5d4; }
+    .dessert-bg { background: #fce4ec; }
+
+    .menu-card-body { padding: 1.2rem; }
+    .menu-card-category {
+      font-size: 0.75rem;
+      color: #a08060;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+    .menu-card-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .menu-card-price { font-size: 1rem; color: #7a5c45; }
+
+    .empty {
+      text-align: center;
+      padding: 5rem;
+      color: #a08060;
+      grid-column: 1 / -1;
+    }
+    .empty p { font-size: 1.1rem; margin-bottom: 1rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      text-decoration: none;
+      background: #3d2b1f;
+      color: #fdf6ec;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #5a3e2b; }
+
+    .add-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 1rem;
+      padding: 0.7rem 1.8rem;
+      border-radius: 30px;
+      background: #3d2b1f;
+      color: #fdf6ec;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .add-btn:hover { background: #5a3e2b; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #3d2b1f;
+      color: #a08060;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1><a href="/" style="color:#fdf6ec; text-decoration:none;">☕ Cozy Bean</a></h1>
+  <a href="/menus/new">+ 메뉴 등록</a>
+</header>
+
+<div class="page-title">
+  <h2>☕ 메뉴 목록</h2>
+  <p>Cozy Bean의 모든 메뉴를 만나보세요</p>
+</div>
+
+<a href="/menus/new" class="add-btn">+ 새 메뉴 등록하기</a>
+
+<div class="menu-grid">
+  <th:block th:if="${menus.isEmpty()}">
+    <div class="empty">
+      <p>아직 등록된 메뉴가 없어요 ☕</p>
+      <a href="/menus/new" class="btn">첫 메뉴 등록하기</a>
+    </div>
+  </th:block>
+
+  <a th:each="menu : ${menus}"
+     th:href="@{/menus/{id}(id=${menu.id})}"
+     class="menu-card">
+    <div th:class="'menu-card-img ' + (${menu.category == 'COFFEE'} ? 'coffee-bg' :
+                            (${menu.category == 'ADE'} ? 'ade-bg' :
+                            (${menu.category == 'TEA'} ? 'tea-bg' : 'dessert-bg')))">
+                <span th:text="${menu.category == 'COFFEE'} ? '☕' :
+                               (${menu.category == 'ADE'} ? '🧃' :
+                               (${menu.category == 'TEA'} ? '🍵' : '🍰'))">☕</span>
+    </div>
+    <div class="menu-card-body">
+      <div class="menu-card-category" th:text="${menu.category}">COFFEE</div>
+      <div class="menu-card-name" th:text="${menu.name}">메뉴 이름</div>
+      <div class="menu-card-price" th:text="${#numbers.formatInteger(menu.price, 3, 'COMMA')} + '원'">5,000원</div>
+    </div>
+  </a>
+</div>
+
+<footer>
+  <p>© 2025 Cozy Bean Café. All rights reserved.</p>
+</footer>
+</body>
+</html>
