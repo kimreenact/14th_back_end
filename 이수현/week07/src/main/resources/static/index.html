@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ Cozy Bean Café</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', serif; background: #fdf6ec; color: #3d2b1f; }
+
+        header {
+            background: #3d2b1f;
+            color: #fdf6ec;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.6rem; letter-spacing: 2px; }
+        header nav a {
+            color: #f5c97a;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.95rem;
+        }
+        header nav a:hover { text-decoration: underline; }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #fdf6ec 0%, #f5e6cc 100%);
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #f5c97a;
+            color: #3d2b1f;
+            font-size: 0.8rem;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        .hero h2 { font-size: 3rem; margin-bottom: 1rem; color: #3d2b1f; }
+        .hero p { font-size: 1.1rem; color: #7a5c45; margin-bottom: 2.5rem; line-height: 1.8; }
+        .btn-group { display: flex; gap: 1rem; justify-content: center; }
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary { background: #3d2b1f; color: #fdf6ec; }
+        .btn-primary:hover { background: #5a3e2b; }
+        .btn-outline { background: transparent; color: #3d2b1f; border: 2px solid #3d2b1f; }
+        .btn-outline:hover { background: #3d2b1f; color: #fdf6ec; }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 4rem 4rem;
+            background: #fff;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 16px;
+            background: #fdf6ec;
+        }
+        .feature-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #3d2b1f; }
+        .feature-card p { font-size: 0.9rem; color: #7a5c45; line-height: 1.6; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #3d2b1f;
+            color: #a08060;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>☕ Cozy Bean</h1>
+    <nav>
+        <a href="/menus">메뉴 보기</a>
+        <a href="/menus/new">메뉴 등록</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="badge">✦ SINCE 2025 ✦</div>
+    <h2>오늘도 한 잔의<br>여유를 드립니다</h2>
+    <p>정성껏 선별한 원두로 만든 커피와<br>달콤한 디저트가 기다리고 있어요.</p>
+    <div class="btn-group">
+        <a href="/menus" class="btn btn-primary">메뉴 보러가기</a>
+        <a href="/menus/new" class="btn btn-outline">메뉴 등록하기</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <div class="icon">☕</div>
+        <h3>精選 원두</h3>
+        <p>전 세계 농장에서 엄선한<br>최고 품질의 원두만 사용합니다.</p>
+    </div>
+    <div class="feature-card">
+        <div class="icon">🍰</div>
+        <h3>매일 굽는 디저트</h3>
+        <p>매일 아침 직접 구운<br>신선한 디저트를 만나보세요.</p>
+    </div>
+    <div class="feature-card">
+        <div class="icon">🌿</div>
+        <h3>편안한 공간</h3>
+        <p>바쁜 일상 속 잠깐의 쉼을<br>Cozy Bean에서 찾아보세요.</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Cozy Bean Café. All rights reserved.</p>
+</footer>
+</body>
+</html>

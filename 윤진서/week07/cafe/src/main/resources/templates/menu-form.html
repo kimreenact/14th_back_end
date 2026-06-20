@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴 등록 | Cozy Bean</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', serif; background: #fdf6ec; color: #3d2b1f; }
+
+        header {
+            background: #3d2b1f;
+            color: #fdf6ec;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.6rem; letter-spacing: 2px; }
+        header a { color: #f5c97a; text-decoration: none; font-size: 0.95rem; }
+
+        .container {
+            max-width: 520px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        .form-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(61,43,31,0.1);
+        }
+        .form-title { font-size: 1.5rem; margin-bottom: 0.3rem; }
+        .form-subtitle { font-size: 0.9rem; color: #a08060; margin-bottom: 2rem; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #7a5c45;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #e8d5c0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            background: #fdf6ec;
+            color: #3d2b1f;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        input:focus, select:focus { border-color: #3d2b1f; }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+        .category-option { display: none; }
+        .category-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #e8d5c0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #fdf6ec;
+        }
+        .category-option:checked + .category-label {
+            border-color: #3d2b1f;
+            background: #3d2b1f;
+            color: #fdf6ec;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #3d2b1f;
+            color: #fdf6ec;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+        .btn-submit:hover { background: #5a3e2b; }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #a08060;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { color: #3d2b1f; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #3d2b1f;
+            color: #a08060;
+            font-size: 0.85rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1><a href="/" style="color:#fdf6ec; text-decoration:none;">☕ Cozy Bean</a></h1>
+    <a href="/menus">← 메뉴 목록</a>
+</header>
+
+<div class="container">
+    <div class="form-card">
+        <h2 class="form-title" th:text="${menu != null} ? '메뉴 수정' : '새 메뉴 등록'">새 메뉴 등록</h2>
+        <p class="form-subtitle" th:text="${menu != null} ? '메뉴 정보를 수정해보세요 ✏️' : 'Cozy Bean의 새로운 메뉴를 추가해보세요 ☕'"></p>
+
+        <form th:action="${menu != null} ? @{/menus/{id}/edit(id=${menu.id})} : @{/menus/new}" method="post">
+            <div class="form-group">
+                <label>메뉴 이름</label>
+                <input type="text" name="name" th:value="${menu != null} ? ${menu.name} : ''"
+                       placeholder="예: 아이스 아메리카노" required>
+            </div>
+
+            <div class="form-group">
+                <label>가격 (원)</label>
+                <input type="number" name="price" th:value="${menu != null} ? ${menu.price} : ''"
+                       placeholder="예: 4500" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>카테고리</label>
+                <div class="category-grid">
+                    <input type="radio" name="category" id="cat-coffee" value="COFFEE" class="category-option"
+                           th:checked="${menu != null and menu.category == 'COFFEE'}" required>
+                    <label for="cat-coffee" class="category-label">☕ COFFEE</label>
+
+                    <input type="radio" name="category" id="cat-ade" value="ADE" class="category-option"
+                           th:checked="${menu != null and menu.category == 'ADE'}">
+                    <label for="cat-ade" class="category-label">🧃 ADE</label>
+
+                    <input type="radio" name="category" id="cat-tea" value="TEA" class="category-option"
+                           th:checked="${menu != null and menu.category == 'TEA'}">
+                    <label for="cat-tea" class="category-label">🍵 TEA</label>
+
+                    <input type="radio" name="category" id="cat-dessert" value="DESSERT" class="category-option"
+                           th:checked="${menu != null and menu.category == 'DESSERT'}">
+                    <label for="cat-dessert" class="category-label">🍰 DESSERT</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit"
+                    th:text="${menu != null} ? '메뉴 수정하기' : '메뉴 등록하기'">메뉴 등록하기</button>
+        </form>
+    </div>
+    <a href="/menus" class="back-link">← 전체 메뉴 보러가기</a>
+</div>
+
+<footer>
+    <p>© 2025 Cozy Bean Café. All rights reserved.</p>
+</footer>
+</body>
+</html>
