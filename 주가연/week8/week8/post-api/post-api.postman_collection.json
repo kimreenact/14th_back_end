@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "Post API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "게시글 전체 조회",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/posts"
+      }
+    },
+    {
+      "name": "게시글 생성",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"첫 번째 게시글\",\n  \"content\": \"안녕하세요\",\n  \"author\": \"현준\"\n}"
+        },
+        "url": "http://localhost:8080/api/posts"
+      }
+    },
+    {
+      "name": "게시글 상세 조회",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/posts/1"
+      }
+    },
+    {
+      "name": "게시글 수정",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"수정된 제목\",\n  \"content\": \"수정된 내용\",\n  \"author\": \"현준\"\n}"
+        },
+        "url": "http://localhost:8080/api/posts/1"
+      }
+    },
+    {
+      "name": "게시글 삭제",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8080/api/posts/1"
+      }
+    }
+  ]
+}
