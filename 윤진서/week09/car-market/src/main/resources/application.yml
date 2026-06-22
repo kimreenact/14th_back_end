@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: car-market
+  datasource:
+    url: jdbc:mysql://localhost:3306/car_market
+    username: root
+    password: jinjin0171$
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
