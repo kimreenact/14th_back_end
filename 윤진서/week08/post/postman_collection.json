@@ -1,0 +1,108 @@
+{
+  "info": {
+    "name": "게시글 관리 API",
+    "description": "8주차 과제 - CRUD REST API 테스트 컬렉션",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. 게시글 생성 (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"첫 번째 게시글\",\n  \"content\": \"안녕하세요. 첫 게시글 내용입니다.\",\n  \"author\": \"홍길동\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/posts",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts"]
+        },
+        "description": "새 게시글을 생성한다. 성공 시 201 Created."
+      }
+    },
+    {
+      "name": "2. 게시글 전체 조회 (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts?keyword=",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts"],
+          "query": [
+            { "key": "keyword", "value": "", "description": "제목 검색 키워드 (선택)" }
+          ]
+        },
+        "description": "전체 게시글을 조회한다. keyword 로 제목 검색 가능."
+      }
+    },
+    {
+      "name": "3. 게시글 상세 조회 (GET /{id})",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "1"]
+        },
+        "description": "id=1 게시글을 조회한다."
+      }
+    },
+    {
+      "name": "4. 게시글 수정 (PATCH /{id})",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"수정된 제목\",\n  \"content\": \"수정된 내용입니다.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "1"]
+        },
+        "description": "id=1 게시글을 부분 수정한다."
+      }
+    },
+    {
+      "name": "5. 게시글 삭제 (DELETE /{id})",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "1"]
+        },
+        "description": "id=1 게시글을 삭제한다. 성공 시 204 No Content."
+      }
+    },
+    {
+      "name": "6. 없는 id 조회 (404 테스트)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "999"]
+        },
+        "description": "존재하지 않는 id 조회 시 404 예외 발생 여부를 테스트한다."
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: post
+  thymeleaf:
+    cache: false   # 개발 중 템플릿 변경 즉시 반영
+
+# Swagger(springdoc-openapi) 설정
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html      # Swagger UI 접속 경로
+    operations-sorter: method   # HTTP 메서드 순 정렬
+  api-docs:
+    path: /v3/api-docs          # OpenAPI 문서(JSON) 경로
